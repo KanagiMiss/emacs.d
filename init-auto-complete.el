@@ -3,6 +3,14 @@
 (global-auto-complete-mode t)
 (setq ac-expand-on-auto-complete nil)
 (setq ac-auto-start nil)
+(ac-set-trigger-key "TAB")
+;;(setq ac-quick-help-delay 1.6)
+;;stop ac-complete
+(define-key ac-completing-map "\M-/" 'ac-stop)
+(setq ac-dwim nil) ; To get pop-ups with docs even if a word is uniquely completed
+(define-key ac-completing-map (kbd "C-n") 'ac-next)
+(define-key ac-completing-map (kbd "C-p") 'ac-previous)
+
 (setq ac-dwim nil) ; To get pop-ups with docs even if a word is uniquely completed
 
 ;;----------------------------------------------------------------------------
@@ -31,7 +39,11 @@
                ac-source-dictionary
                ac-source-words-in-buffer
                ac-source-words-in-same-mode-buffers
-               ac-source-words-in-all-buffer))
+               ac-source-words-in-all-buffer
+               ;;enable if needed
+               ;;ac-source-clang
+               ;;ac-source-yasnippet
+               ))
 
 (dolist (mode '(magit-log-edit-mode log-edit-mode org-mode text-mode haml-mode
                 sass-mode yaml-mode csv-mode espresso-mode haskell-mode
