@@ -1,21 +1,14 @@
-(require-package 'unfill)
-(require-package 'whole-line-or-region)
-
-(when (fboundp 'electric-pair-mode)
-  (setq-default electric-pair-mode 1))
-
 ;;----------------------------------------------------------------------------
 ;; Some basic preferences
 ;;----------------------------------------------------------------------------
 (setq-default
  blink-cursor-delay 0
  blink-cursor-interval 0.4
- bookmark-default-file (expand-file-name ".bookmarks.el" user-emacs-directory)
+ bookmark-default-file "~/.emacs.d/.bookmarks.el"
  buffers-menu-max-size 30
  case-fold-search t
  column-number-mode t
  compilation-scroll-output t
- delete-selection-mode t
  ediff-split-window-function 'split-window-horizontally
  ediff-window-setup-function 'ediff-setup-windows-plain
  grep-highlight-matches t
@@ -24,8 +17,6 @@
  line-spacing 0.2
  make-backup-files nil
  mouse-yank-at-point t
- save-interprogram-paste-before-kill t
- scroll-preserve-screen-position 'always
  set-mark-command-repeat-pop t
  show-trailing-whitespace t
  tooltip-delay 1.5
@@ -38,18 +29,13 @@
       auto-revert-verbose nil)
 
 ;; But don't show trailing whitespace in SQLi, inf-ruby etc.
-(dolist (hook '(term-mode-hook comint-mode-hook compilation-mode-hook))
+(dolist (hook '(term-mode-hook comint-mode-hook))
   (add-hook hook
-            (lambda () (setq show-trailing-whitespace nil))))
+   (lambda () (setq show-trailing-whitespace nil))))
 
 (transient-mark-mode t)
 
-(global-set-key (kbd "RET") 'newline-and-indent)
-
-
-(require-package 'undo-tree)
-(global-undo-tree-mode)
-(diminish 'undo-tree-mode)
+(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;;----------------------------------------------------------------------------
 ;; Zap *up* to char is a handy pair for zap-to-char
@@ -67,27 +53,19 @@
 ;;----------------------------------------------------------------------------
 ;; Show matching parens
 ;;----------------------------------------------------------------------------
-(require-package 'mic-paren)
 (paren-activate)     ; activating mic-paren
 
 ;;----------------------------------------------------------------------------
 ;; Expand region
 ;;----------------------------------------------------------------------------
-(require-package 'expand-region)
+(require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 
 ;;----------------------------------------------------------------------------
 ;; Fix per-window memory of buffer point positions
 ;;----------------------------------------------------------------------------
-(require-package 'pointback)
 (global-pointback-mode)
-(eval-after-load 'skeleton
-  '(defadvice skeleton-insert (before disable-pointback activate)
-     "Disable pointback when using skeleton functions like `sgml-tag'."
-     (when pointback-mode
-       (message "Disabling pointback.")
-       (pointback-mode -1))))
 
 
 ;;----------------------------------------------------------------------------
@@ -113,15 +91,13 @@
 (global-set-key (kbd "C-c j") 'join-line)
 (global-set-key (kbd "C-c J") (lambda () (interactive) (join-line 1)))
 
+(global-set-key (kbd "M-T") 'transpose-lines)
 (global-set-key (kbd "C-.") 'set-mark-command)
 (global-set-key (kbd "C-x C-.") 'pop-global-mark)
-
-(require-package 'ace-jump-mode)
 (global-set-key (kbd "C-;") 'ace-jump-mode)
 (global-set-key (kbd "C-:") 'ace-jump-word-mode)
 
 
-(require-package 'multiple-cursors)
 ;; multiple-cursors
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -135,7 +111,6 @@
 
 
 (defun duplicate-line ()
-  "Insert a copy of the current line after the current line."
   (interactive)
   (save-excursion
     (let ((line-text (buffer-substring-no-properties
@@ -166,22 +141,19 @@
 ;;----------------------------------------------------------------------------
 ;; Page break lines
 ;;----------------------------------------------------------------------------
-(require-package 'page-break-lines)
 (global-page-break-lines-mode)
-(diminish 'page-break-lines-mode)
 
 ;;----------------------------------------------------------------------------
 ;; Fill column indicator
 ;;----------------------------------------------------------------------------
-(when (eval-when-compile (> emacs-major-version 23))
-  (require-package 'fill-column-indicator)
+(when (> emacs-major-version 23)
   (defun sanityinc/prog-mode-fci-settings ()
     (turn-on-fci-mode)
     (when show-trailing-whitespace
       (set (make-local-variable 'whitespace-style) '(face trailing))
       (whitespace-mode 1)))
 
-  ;;(add-hook 'prog-mode-hook 'sanityinc/prog-mode-fci-settings)
+  (add-hook 'prog-mode-hook 'sanityinc/prog-mode-fci-settings)
 
   (defun sanityinc/fci-enabled-p ()
     (and (boundp 'fci-mode) fci-mode))
@@ -209,14 +181,10 @@
 
 
 ;;----------------------------------------------------------------------------
-;; Shift lines up and down with M-up and M-down. When paredit is enabled,
-;; it will use those keybindings. For this reason, you might prefer to
-;; use M-S-up and M-S-down, which will work even in lisp modes.
+;; Shift lines up and down with M-up and M-down
 ;;----------------------------------------------------------------------------
-(require-package 'move-text)
 (move-text-default-bindings)
-(global-set-key [M-S-up] 'move-text-up)
-(global-set-key [M-S-down] 'move-text-down)
+
 
 ;;----------------------------------------------------------------------------
 ;; Fix backward-up-list to understand quotes, see http://bit.ly/h7mdIL
@@ -259,38 +227,6 @@
 (suspend-mode-during-cua-rect-selection 'whole-line-or-region-mode)
 
 
-
-
-(defun sanityinc/open-line-with-reindent (n)
-  "A version of `open-line' which reindents the start and end positions.
-If there is a fill prefix and/or a `left-margin', insert them
-on the new line if the line would have been blank.
-With arg N, insert N newlines."
-  (interactive "*p")
-  (let* ((do-fill-prefix (and fill-prefix (bolp)))
-	 (do-left-margin (and (bolp) (> (current-left-margin) 0)))
-	 (loc (point-marker))
-	 ;; Don't expand an abbrev before point.
-	 (abbrev-mode nil))
-    (delete-horizontal-space t)
-    (newline n)
-    (indent-according-to-mode)
-    (when (eolp)
-      (delete-horizontal-space t))
-    (goto-char loc)
-    (while (> n 0)
-      (cond ((bolp)
-	     (if do-left-margin (indent-to (current-left-margin)))
-	     (if do-fill-prefix (insert-and-inherit fill-prefix))))
-      (forward-line 1)
-      (setq n (1- n)))
-    (goto-char loc)
-    (end-of-line)
-    (indent-according-to-mode)))
-
-(global-set-key [remap open-line] 'sanityinc/open-line-with-reindent)
-
-
 ;;----------------------------------------------------------------------------
 ;; Random line sorting
 ;;----------------------------------------------------------------------------
@@ -305,17 +241,6 @@ With arg N, insert N newlines."
           ((inhibit-field-text-motion t))
         (sort-subr nil 'forward-line 'end-of-line nil nil
                    (lambda (s1 s2) (eq (random 2) 0)))))))
-
-
-
-(require-package 'visual-regexp)
-(global-set-key [remap query-replace-regexp] 'vr/query-replace)
-(global-set-key [remap replace-regexp] 'vr/replace)
-
-
-
-(when (executable-find "ag")
-  (require-package 'ag))
 
 
 (provide 'init-editing-utils)

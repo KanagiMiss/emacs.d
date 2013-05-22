@@ -1,5 +1,3 @@
-(require-package 'dired+)
-
 (eval-after-load 'dired
   '(progn
      (require 'dired+)

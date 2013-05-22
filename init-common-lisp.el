@@ -1,9 +1,9 @@
 ;; See http://bc.tech.coop/blog/070927.html
 (add-auto-mode 'lisp-mode "\\.cl\\'")
 (add-hook 'lisp-mode-hook (lambda ()
-                            (unless (featurep 'slime)
-                              (require 'slime)
-                              (normal-mode))))
+                            (cond ((not (featurep 'slime))
+                                   (require 'slime)
+                                   (normal-mode)))))
 
 (eval-after-load 'slime
   '(progn

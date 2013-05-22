@@ -1,18 +1,9 @@
-(require-package 'marmalade)
-
 ;;; Handy code for uploading new versions of my own packages to marmalade
 
 (autoload 'marmalade-upload-buffer "marmalade")
 
-(defun sanityinc/parse-git-version (s)
-  "Return numeric version array parsed from S, or nil."
-  (ignore-errors (version-to-list s)))
-
 (defun latest-version-from-git-tag ()
-  (let ((versions
-         (remove-if #'null
-                    (mapcar #'sanityinc/parse-git-version
-                            (split-string (shell-command-to-string "git tag"))))))
+  (let ((versions (mapcar #'version-to-list (split-string (shell-command-to-string "git tag")))))
     (sort versions #'version-list-<)
     (package-version-join (car (last versions)))))
 
@@ -49,12 +40,13 @@
   "Submit the elisp library in BUF to Marmalade."
   (interactive
    (list
-    (let ((buffers (loop for b in (mapcar 'buffer-name (buffer-list))
-                         when (with-current-buffer b
-                                (and buffer-file-name
-                                     (eq major-mode 'emacs-lisp-mode)))
-                         collect b)))
-      (completing-read "Submit buffer: " buffers nil t nil nil (car buffers)))))
+    (completing-read "Submit buffer: "
+                     (mapcar 'buffer-name (buffer-list))
+                     (lambda (b)
+                       (with-current-buffer b
+                         (and buffer-file-name
+                              (eq major-mode 'emacs-lisp-mode))))
+                     t)))
   (with-current-buffer buf
     (let ((tag (latest-version-from-git-tag)))
       (unless tag

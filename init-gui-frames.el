@@ -59,9 +59,5 @@
               (unless window-system
                 (set-frame-parameter nil 'menu-bar-lines 0)))))
 
-(setq frame-title-format
-      '((:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-                 "%b"))))
 
 (provide 'init-gui-frames)

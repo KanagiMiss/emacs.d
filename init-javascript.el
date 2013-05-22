@@ -1,22 +1,10 @@
-(require-package 'json)
-(require-package 'js3-mode)
-(when (>= emacs-major-version 24)
-  (require-package 'js2-mode)
-  (require-package 'ac-js2))
-(require-package 'js-comint)
-(require-package 'rainbow-delimiters)
-(require-package 'coffee-mode)
-(require-package 'flymake-coffee)
-(require-package 'flymake-jslint)
-(require-package 'flymake-json)
-
-
 (defcustom preferred-javascript-mode
   (first (remove-if-not #'fboundp '(js2-mode js3-mode)))
   "Javascript mode to use for .js files."
   :type 'symbol
   :group 'programming
-  :options '(js2-mode js3-mode js-mode))
+  :options '(js2-mode js3-mode js-mode)
+  )
 (defvar preferred-javascript-indent-level 2)
 
 ;; Need to first remove from list if present, since elpa adds entries too, which
@@ -45,8 +33,6 @@
       js2-auto-indent-p t
       js2-bounce-indent-p nil)
 
-(eval-after-load 'js2-mode '(js2-imenu-extras-setup))
-
 ;; js3-mode
 (add-hook 'js3-mode-hook '(lambda () (setq mode-name "JS3")))
 (setq js3-auto-indent-p t
@@ -69,35 +55,22 @@
          coffee-tab-width preferred-javascript-indent-level))
 
 (add-hook 'coffee-mode-hook 'flymake-coffee-load)
-(add-to-list 'auto-mode-alist '("\\.coffee\\.erb\\'" . coffee-mode))
+
 
 ;; ---------------------------------------------------------------------------
 ;; Run and interact with an inferior JS via js-comint.el
 ;; ---------------------------------------------------------------------------
 
 (setq inferior-js-program-command "js")
-
-(defvar inferior-js-minor-mode-map (make-sparse-keymap))
-(define-key inferior-js-minor-mode-map "\C-x\C-e" 'js-send-last-sexp)
-(define-key inferior-js-minor-mode-map "\C-\M-x" 'js-send-last-sexp-and-go)
-(define-key inferior-js-minor-mode-map "\C-cb" 'js-send-buffer)
-(define-key inferior-js-minor-mode-map "\C-c\C-b" 'js-send-buffer-and-go)
-(define-key inferior-js-minor-mode-map "\C-cl" 'js-load-file-and-go)
-
-(define-minor-mode inferior-js-keys-mode
-  "Bindings for communicating with an inferior js interpreter."
-  nil " InfJS" inferior-js-minor-mode-map)
+(defun add-inferior-js-keys ()
+  (local-set-key "\C-x\C-e" 'js-send-last-sexp)
+  (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
+  (local-set-key "\C-cb" 'js-send-buffer)
+  (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
+  (local-set-key "\C-cl" 'js-load-file-and-go))
 
 (dolist (hook '(js2-mode-hook js3-mode-hook js-mode-hook))
-  (add-hook hook 'inferior-js-keys-mode))
-
-;; ---------------------------------------------------------------------------
-;; Alternatively, use skewer-mode
-;; ---------------------------------------------------------------------------
-
-(when (featurep 'js2-mode)
-  (require-package 'skewer-mode)
-  (add-hook 'skewer-mode-hook (lambda () (inferior-js-keys-mode -1))))
+  (add-hook hook 'add-inferior-js-keys))
 
 
 (provide 'init-javascript)

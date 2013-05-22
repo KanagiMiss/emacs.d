@@ -1,11 +1,3 @@
-(when (< emacs-major-version 24)
-  (require-package 'org))
-(require-package 'org-fstree)
-(when *is-a-mac*
-  (require-package 'org-mac-link-grabber)
-  (require-package 'org-mac-iCal))
-
-
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 
@@ -19,7 +11,8 @@
       org-agenda-window-setup 'current-window
       org-fast-tag-selection-single-key 'expert
       org-export-kill-product-buffer-when-displayed t
-      org-tags-column 80)
+      org-tags-column 80
+      org-startup-indented t)
 
 
 ; Refile targets include this file and any file contributing to the agenda - up to 5 levels deep
@@ -91,15 +84,13 @@
 
 (eval-after-load 'org
   '(progn
-     (define-key org-mode-map (kbd "C-M-<up>") 'org-up-element)
-     (when *is-a-mac*
-       (define-key org-mode-map (kbd "M-h") nil))
-     (define-key org-mode-map (kbd "C-M-<up>") 'org-up-element)
      (require 'org-exp)
      (require 'org-clock)
      (when *is-a-mac*
        (require 'org-mac-link-grabber)
-       (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link))
+       (add-hook 'org-mode-hook
+                 (lambda ()
+                   (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link))))
      ;;(require 'org-checklist)
      (require 'org-fstree)))
 

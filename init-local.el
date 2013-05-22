@@ -77,7 +77,7 @@ them with the current numbers.  With optional prefix argument ALL,
 do this for the whole buffer."
   (interactive "P")
   (save-excursion
-    (let* ((buffer-invisibility-spec (org-inhibit-invisibility)) 
+    (let* ((buffer-invisibility-spec (org-inhibit-invisibility))
 	   (beg (condition-case nil
 		    (progn (outline-back-to-heading) (point))
 		  (error (point-min))))
@@ -85,7 +85,7 @@ do this for the whole buffer."
 		 (make-marker)
 		 (progn (or (outline-get-next-sibling) ;; (1)
 			    (goto-char (point-max)))
-			(point))))   
+			(point))))
 	   (re "\\(\\[[0-9]*%\\]\\)\\|\\(\\[[0-9]*/[0-9]*\\]\\)")
 	   (re-box
 	    "^[ \t]*\\(*+\\|[-+*]\\|[0-9]+[.)]\\) +\\(\\[[- X]\\]\\)")
@@ -151,6 +151,17 @@ do this for the whole buffer."
 ;;5: Saves remembered notes to an Org file
 
 ;;frame
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;git-emacs配置
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(add-to-list 'load-path "~/.emacs.d/local-plugins/git-emacs/")
+;;(require 'git-emacs)
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
