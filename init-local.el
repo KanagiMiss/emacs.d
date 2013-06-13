@@ -15,6 +15,8 @@
 (setq display-time-day-and-date t)
 ;;显示时间的格式
 (setq display-time-format "%m月%d日%A%H:%M")
+;fontsize
+(set-face-attribute 'default nil :height 120)
 
 ;;改变emacs标题栏的标题
 (setq frame-title-format "%b@misskanagi的E酱~")
