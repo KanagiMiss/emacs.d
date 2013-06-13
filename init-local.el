@@ -67,6 +67,18 @@
    (find-file "~/.emacs.d/GTD/kanagi_gtd.org")
  )
 
+(defun gtd-private ()
+   (interactive)
+   (find-file "~/.emacs.d/GTD/kanagi_private.org")
+ )
+
+;;call remember by using f12
+(define-key global-map [f12] 'org-remember)
+
+(setq org-agenda-files (list "~/.emacs.d/GTD/kanagi_gtd.org"
+                             "~/.emacs.d/GTD/kanagi_private.org"))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;org-mode check-box feature
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
