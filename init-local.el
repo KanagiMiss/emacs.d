@@ -4,8 +4,8 @@
 ;;个人信息
 (setq user-full-name "misskanagi")
 
-;;设置默认主模式
-(setq default-major-mode 'org-mode)
+;;设置默认主模式 由于一些bug 现在暂时不将其设为主模式 2013-6-13
+;;(setq default-major-mode 'org-mode)
 ;;时间显示设置
 ;;启用时间显示设置，在minibuffer上面的那个杠上
 (display-time-mode 1)
