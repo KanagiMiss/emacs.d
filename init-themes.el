@@ -39,8 +39,8 @@ ignored: use `custom-enabled-themes' instead."
 ;;------------------------------------------------------------------------------
 
 ;; If you don't customize it, this is the theme you get.
-(setq-default custom-enabled-themes '(color-theme-sanityinc-tomorrow-night))
-;;(color-theme-sanityinc-tomorrow-eighties)
+;;(setq-default custom-enabled-themes '(color-theme-sanityinc-tomorrow-night))
+;;(color-theme-sanityinc-tomorrow-night)
 
 ;; Ensure that themes will be applied even if they have not been customized
 (defun reapply-themes ()

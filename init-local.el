@@ -15,8 +15,12 @@
 (setq display-time-day-and-date t)
 ;;显示时间的格式
 (setq display-time-format "%m月%d日%A%H:%M")
-;fontsize
+;fontsize 字体大小
 (set-face-attribute 'default nil :height 120)
+;中文字等宽、等高问题 经检测，未解决
+(setq face-font-rescale-alist '(("微软雅黑" . 1.2) ("Microsoft Yahei" . 1.2) ("WenQuanYi Zen Hei" . 1.2)))
+;启动emacs server
+(server-mode 1)
 
 ;;改变emacs标题栏的标题
 (setq frame-title-format "%b@misskanagi的E酱~")
@@ -49,6 +53,28 @@
 	     (set-cursor-color "pink")))
 (add-hook 'after-make-frame-functions
 	  '(lambda (f) (with-selected-frame f (set-cursor-color "pink"))))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;C/C++
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'c-mode-hook 'hs-minor-mode)
+(add-hook 'c++-mode-hook 'hs-minor-mode)
+(add-hook 'c-mode-hook
+ (lambda ()
+ (local-set-key (kbd "C-c sb") 'hs-show-block)
+ (local-set-key (kbd "C-c hb") 'hs-hide-block)
+ )
+)
+(add-hook 'c++-mode-hook
+ (lambda ()
+ (local-set-key (kbd "C-c sb") 'hs-show-block)
+ (local-set-key (kbd "C-c hb") 'hs-hide-block)
+ )
+)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
