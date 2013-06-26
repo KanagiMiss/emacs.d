@@ -35,7 +35,10 @@
 (require 'init-recentf)
 (require 'init-ido)
 (require 'init-hippie-expand)
+(require 'init-yasnippet)
 (require 'init-auto-complete)
+(require 'init-auto-complete-clang)
+(require 'init-auctex)
 (require 'init-windows)
 (require 'init-sessions)
 (require 'init-fonts)
@@ -102,7 +105,9 @@
 ;;----------------------------------------------------------------------------
 ;; Locales (setting them earlier in this file doesn't work in X)
 ;;----------------------------------------------------------------------------
-(require 'init-locales)
+(if (not (eq system-type 'windows-nt))
+    (require 'init-locales)
+  )
 
 
 
