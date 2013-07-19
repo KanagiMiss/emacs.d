@@ -18,7 +18,9 @@
 ;fontsize 字体大小
 (set-face-attribute 'default nil :height 120)
 ;中文字等宽、等高问题 经检测，未解决
-(setq face-font-rescale-alist '(("微软雅黑" . 1.2) ("Microsoft Yahei" . 1.2) ("WenQuanYi Zen Hei" . 1.2)))
+(if (eq system-type 'windows-nt)
+    (setq face-font-rescale-alist '(("微软雅黑" . 1.2) ("Microsoft Yahei" . 1.2) ("WenQuanYi Zen Hei" . 1.2)))
+  )
 ;启动emacs server
 (server-mode 1)
 
