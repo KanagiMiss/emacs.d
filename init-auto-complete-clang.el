@@ -44,6 +44,27 @@
 "
                ))
         )
+    (if (eq system-type 'darwin)
+        (progn
+          (message "Loading mac os x clang config file.")
+          (setq ac-clang-flags
+                (split-string
+                 "
+-I/usr/llvm-gcc-4.2/bin/../lib/gcc/i686-apple-darwin11/4.2.1/include
+-I/usr/include/c++/4.2.1
+-I/usr/include/c++/4.2.1/backward
+-I/Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/include
+-I/usr/include
+-I/Users/misskanagi/Development/wxWidgets-2.9.5/build-release/lib/wx/include/osx_cocoa-unicode-static-2.9
+-I/Users/misskanagi/Development/wxWidgets-2.9.5/include
+-D_FILE_OFFSET_BITS=64
+-D__WXMAC__
+-D__WXOSX__
+-D__WXOSX_COCOA__
+"
+                 ))
+          )
+      )
     )
   )
 
