@@ -22,8 +22,11 @@
 ;;     (setq face-font-rescale-alist '(("微软雅黑" . 1.2) ("Microsoft Yahei" . 1.2) ("WenQuanYi Zen Hei" . 1.2)))
 ;;   )
 (defun qiang-font-existsp (font)
-  (if (null (x-list-fonts font))
-      nil t))
+  (when (display-graphic-p)
+    (if (null (x-list-fonts font))
+        nil t)
+    )
+)
 
 (defvar font-list '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体"))
 (require 'cl) ;; find-if is in common list package
@@ -65,9 +68,12 @@ If set/leave chinese-font-size to nil, it will follow english-font-size"
       (set-fontset-font (frame-parameter nil 'font)
                         charset
                         zh-font))))
-(qiang-set-font
- '("Consolas" "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=15"
- '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体" "Hei"))
+
+(when (display-graphic-p)
+    (qiang-set-font
+     '("Consolas" "Monaco" "DejaVu Sans Mono" "Monospace" "Courier New") ":pixelsize=15"
+     '("Microsoft Yahei" "文泉驿等宽微米黑" "黑体" "新宋体" "宋体" "Hei"))
+    )
 
 ;启动emacs server
 (server-mode 1)
