@@ -211,5 +211,10 @@ ARCHIVE is the string name of the package archive.")
 (require-package 'unfill)
 (require-package 'vc-darcs)
 (require-package 'whole-line-or-region)
+;;require by misskanagi
+(require-package 'yasnippet)
+(require-package 'auctex)
+(require-package 'auto-complete-auctex)
+(require-package 'auto-complete-clang )
 
 (provide 'init-elpa)

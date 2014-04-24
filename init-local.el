@@ -265,49 +265,48 @@ do this for the whole buffer."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;w3m配置
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/local-plugins/emacs-w3m"))
-(require 'w3m-load)
-(require 'w3m-e21)
-(provide 'w3m-e23)
-;;代理设置
-(defvar ka-http-proxy "127.0.0.1:8087")
-(defun ka-toggle-proxy (force)
-  "Toggle proxy. With prefix, set proxy on."
-  (interactive "P")
-  (if (or force
-          (not (getenv "http_proxy")))
-      (progn
-        (setenv "http_proxy" ka-http-proxy)
-        (message "proxy set to %s" (getenv "http_proxy")))
-    (setenv "http_proxy" nil)
-    (message "proxy off"))) 
+;; (require 'w3m-load)
+;; (require 'w3m-e21)
+;; (provide 'w3m-e23)
+;; ;;代理设置
+;; (defvar ka-http-proxy "127.0.0.1:8087")
+;; (defun ka-toggle-proxy (force)
+;;   "Toggle proxy. With prefix, set proxy on."
+;;   (interactive "P")
+;;   (if (or force
+;;           (not (getenv "http_proxy")))
+;;       (progn
+;;         (setenv "http_proxy" ka-http-proxy)
+;;         (message "proxy set to %s" (getenv "http_proxy")))
+;;     (setenv "http_proxy" nil)
+;;     (message "proxy off"))) 
 
-(setq w3m-use-favicon nil)
-;;coding
- (setq w3m-coding-system 'utf-8
-       w3m-file-coding-system 'utf-8
-       w3m-file-name-coding-system 'utf-8
-       w3m-input-coding-system 'utf-8
-       w3m-output-coding-system 'utf-8
-       w3m-terminal-coding-system 'utf-8)
-;; 默认显示图片
-(setq w3m-default-display-inline-images t)
-(setq w3m-default-toggle-inline-images t)
-;; 使用cookies
-(setq w3m-use-cookies t)
-;;设定w3m运行的参数，分别为使用cookie和使用框架
-(setq w3m-command-arguments '("-cookie" "-F"))
-;; 使用w3m作为默认浏览器
-(setq browse-url-browser-function 'w3m-browse-url)
-(setq w3m-view-this-url-new-session-in-background t)
-;;显示图标
-(setq w3m-show-graphic-icons-in-header-line t)
-(setq w3m-show-graphic-icons-in-mode-line t)
-;;设置首页
-;(setq w3m-home-page "www.google.com.hk")
-;;set abbrev
-;;(setq-default abbrev-mode t)
-(setq save-abbrevs t)
+;; (setq w3m-use-favicon nil)
+;; ;;coding
+;;  (setq w3m-coding-system 'utf-8
+;;        w3m-file-coding-system 'utf-8
+;;        w3m-file-name-coding-system 'utf-8
+;;        w3m-input-coding-system 'utf-8
+;;        w3m-output-coding-system 'utf-8
+;;        w3m-terminal-coding-system 'utf-8)
+;; ;; 默认显示图片
+;; (setq w3m-default-display-inline-images t)
+;; (setq w3m-default-toggle-inline-images t)
+;; ;; 使用cookies
+;; (setq w3m-use-cookies t)
+;; ;;设定w3m运行的参数，分别为使用cookie和使用框架
+;; (setq w3m-command-arguments '("-cookie" "-F"))
+;; ;; 使用w3m作为默认浏览器
+;; (setq browse-url-browser-function 'w3m-browse-url)
+;; (setq w3m-view-this-url-new-session-in-background t)
+;; ;;显示图标
+;; (setq w3m-show-graphic-icons-in-header-line t)
+;; (setq w3m-show-graphic-icons-in-mode-line t)
+;; ;;设置首页
+;; ;(setq w3m-home-page "www.google.com.hk")
+;; ;;set abbrev
+;; ;;(setq-default abbrev-mode t)
+;; (setq save-abbrevs t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
