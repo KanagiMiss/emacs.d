@@ -1,4 +1,3 @@
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/local-plugins/auto-complete-clang"))
 (require 'auto-complete-clang)
 
 (if (eq system-type 'windows-nt)
