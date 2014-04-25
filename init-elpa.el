@@ -150,7 +150,9 @@ ARCHIVE is the string name of the package archive.")
   (require-package 'org))
 (require-package 'org-fstree)
 (when *is-a-mac*
-  (require-package 'org-mac-link-grabber)
+;; (require-package 'org-mac-link-grabber)
+;; change to org-mac-link
+  (require-package 'org-mac-link)
   (require-package 'org-mac-iCal))
 (require-package 'htmlize)
 (require-package 'clojure-mode)
