@@ -87,7 +87,9 @@
      (require 'org-exp)
      (require 'org-clock)
      (when *is-a-mac*
-       (require 'org-mac-link-grabber)
+       ;;(require 'org-mac-link-grabber)
+       ;;change to org-mac-link
+       (require 'org-mac-link)
        (add-hook 'org-mode-hook
                  (lambda ()
                    (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link))))
