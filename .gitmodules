@@ -1,0 +1,3 @@
+[submodule "site-lisp/html5-el"]
+	path = site-lisp/html5-el
+	url = c:/Users/misskanagi/AppData/Roaming/.emacs.d/site-lisp/html5-el
