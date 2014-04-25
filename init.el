@@ -1,7 +1,11 @@
 ;;; This file bootstraps the configuration, which is divided into
 ;;; a number of other files.
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+(let ((minver 23))
+  (unless (>= emacs-major-version minver)
+    (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
+
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;;----------------------------------------------------------------------------
 ;; Which functionality to enable (use t or nil for true and false)
@@ -90,13 +94,16 @@
 ;;----------------------------------------------------------------------------
 ;; Variables configured via the interactive 'customize' interface
 ;;----------------------------------------------------------------------------
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 
 ;;----------------------------------------------------------------------------
 ;; Allow users to provide an optional "init-local" containing personal settings
 ;;----------------------------------------------------------------------------
+(when (file-exists-p (expand-file-name "init-local.el" user-emacs-directory))
+  (error "Please move init-local.el to ~/.emacs.d/lisp"))
 (require 'init-local nil t)
 
 
