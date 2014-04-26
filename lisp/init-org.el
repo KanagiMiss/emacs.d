@@ -1,5 +1,13 @@
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
+(when (< emacs-major-version 24)
+  (require-package 'org))
+(require-package 'org-fstree)
+(when *is-a-mac*
+  (require-package 'org-mac-link)
+  (require-package 'org-mac-iCal))
+
+
+(define-key global-map (kbd "C-c l") 'org-store-link)
+(define-key global-map (kbd "C-c a") 'org-agenda)
 
 ;; Various preferences
 (setq org-log-done t
@@ -11,8 +19,7 @@
       org-agenda-window-setup 'current-window
       org-fast-tag-selection-single-key 'expert
       org-export-kill-product-buffer-when-displayed t
-      org-tags-column 80
-      org-startup-indented t)
+      org-tags-column 80)
 
 
 ; Refile targets include this file and any file contributing to the agenda - up to 5 levels deep
@@ -25,7 +32,7 @@
 
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
-              (sequence "WAITING(w@/!)" "SOMEDAY(S)" "PROJECT(P@)" "|" "CANCELLED(c@/!)"))))
+              (sequence "WAITING(w@/!)" "SOMEDAY(S)" "|" "CANCELLED(c@/!)"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,10 +62,9 @@
 (add-hook 'org-clock-out-hook 'sanityinc/hide-org-clock-from-header-line)
 (add-hook 'org-clock-cancel-hook 'sanityinc/hide-org-clock-from-header-line)
 
-(eval-after-load 'org-clock
-  '(progn
-     (define-key org-clock-mode-line-map [header-line mouse-2] 'org-clock-goto)
-     (define-key org-clock-mode-line-map [header-line mouse-1] 'org-clock-menu)))
+(after-load 'org-clock
+  (define-key org-clock-mode-line-map [header-line mouse-2] 'org-clock-goto)
+  (define-key org-clock-mode-line-map [header-line mouse-1] 'org-clock-menu))
 
 
 ;; ;; Show iCal calendars in the org agenda
@@ -82,18 +88,13 @@
 ;;                 (insert (match-string 0))))))
 
 
-(eval-after-load 'org
-  '(progn
-     (require 'org-exp)
-     (require 'org-clock)
-     (when *is-a-mac*
-       ;;(require 'org-mac-link-grabber)
-       ;;change to org-mac-link
-       (require 'org-mac-link)
-       (add-hook 'org-mode-hook
-                 (lambda ()
-                   (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link))))
-     ;;(require 'org-checklist)
-     (require 'org-fstree)))
+(after-load 'org
+  (define-key org-mode-map (kbd "C-M-<up>") 'org-up-element)
+  (when *is-a-mac*
+    (define-key org-mode-map (kbd "M-h") nil))
+  (define-key org-mode-map (kbd "C-M-<up>") 'org-up-element)
+  (when *is-a-mac*
+    (autoload 'omlg-grab-link "org-mac-link")
+    (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)))
 
 (provide 'init-org)

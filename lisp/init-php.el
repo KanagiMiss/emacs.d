@@ -1,3 +1,4 @@
-(add-hook 'php-mode-hook 'flymake-php-load)
+(require-package 'php-mode)
+(require-package 'smarty-mode)
 
 (provide 'init-php)
