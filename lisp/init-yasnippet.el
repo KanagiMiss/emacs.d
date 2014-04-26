@@ -1,9 +1,1 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;yasnippet≈‰÷√
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'yasnippet)
-(yas-global-mode 1)
-
-
-
-(provide 'init-yasnippet)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;yasnippet√Ö√§√ñ√É;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;(require 'yasnippet)(yas-global-mode 1)(provide 'init-yasnippet)
