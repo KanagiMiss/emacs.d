@@ -4,7 +4,7 @@
 (winner-mode 1)
 
 
-
+
 ;; Make "C-x o" prompt for a target window when there are more than 2
 (require-package 'switch-window)
 (require 'switch-window)
@@ -44,7 +44,7 @@
 (global-set-key "\C-x|" 'split-window-horizontally-instead)
 (global-set-key "\C-x_" 'split-window-vertically-instead)
 
-
+
 ;; Borrowed from http://postmomentum.ch/blog/201304/blog-on-emacs
 (defun sanityinc/split-window()
   "Split the window to see the most recent buffer in the other window.
