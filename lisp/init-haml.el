@@ -1,1 +1,3 @@
-(add-hook 'haml-mode-hook 'flymake-haml-load)(provide 'init-haml)
+(add-hook 'haml-mode-hook 'flymake-haml-load)
+
+(provide 'init-haml)
