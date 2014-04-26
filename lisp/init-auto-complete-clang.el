@@ -1,3 +1,4 @@
+(require-package 'auto-complete-clang)
 (require 'auto-complete-clang)
 
 (if (eq system-type 'windows-nt)
