@@ -348,6 +348,7 @@ With arg N, insert N newlines."
 ;; Fix per-window memory of buffer point positions
 ;;----------------------------------------------------------------------------
 ;;(global-pointback-mode)
+(require-package 'winpoint)
 (winpoint-mode 1)
 
 
