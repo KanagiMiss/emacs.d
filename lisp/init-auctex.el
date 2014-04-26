@@ -4,6 +4,7 @@
 ;(load "auctex.el" nil t t)
 ;(load "preview-latex.el" nil t t)
 (require-package 'auctex)
+(require-package 'auto-complete-auctex)
 (load "auctex.el" nil t t)
 (require 'preview)
 (if (string-equal system-type "windows-nt")
