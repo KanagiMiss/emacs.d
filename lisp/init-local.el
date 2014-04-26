@@ -2,6 +2,17 @@
 ;; some details -- by misskanagi
 ;;----------------------------------------------------------------------------
 ;;个人信息
+;;; Code:
+
+;;other require:
+(require 'init-auctex)
+(require 'init-auto-complete-clang)
+(defun yas-init ()
+  (interactive)
+  (require 'init-yasnippet)
+  )
+
+
 (setq user-full-name "misskanagi")
 
 ;;设置默认主模式 由于一些bug 现在暂时不将其设为主模式 2013-6-13
