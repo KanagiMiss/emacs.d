@@ -29,3 +29,5 @@ site-lisp/package/
 /helm-adaptive-history
 /GTD
 /custom.el
+/eshell
+/ede-projects.el
