@@ -26,15 +26,10 @@
 (after-load 'magit
   (fullframe magit-status magit-mode-quit-window))
 
-<<<<<<< HEAD
-
-=======
 (add-hook 'git-commit-mode-hook 'goto-address-mode)
 (after-load 'session
   (add-to-list 'session-mode-disable-list 'git-commit-mode))
 
-
->>>>>>> purcell/master
 ;;; When we start working on git-backed files, use git-wip if available
 
 (after-load 'magit

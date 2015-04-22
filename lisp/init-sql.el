@@ -13,8 +13,6 @@
      (defadvice sql-set-product (after set-dash-docset activate)
        (sanityinc/maybe-set-dash-db-docset))))
 
-<<<<<<< HEAD
-=======
     (add-hook 'sql-mode-hook 'sanityinc/maybe-set-dash-db-docset)
     (add-hook 'sql-interactive-mode-hook 'sanityinc/maybe-set-dash-db-docset)
     (defadvice sql-set-product (after set-dash-docset activate)
@@ -32,6 +30,5 @@
 
 (after-load 'page-break-lines
   (push 'sql-mode page-break-lines-modes))
->>>>>>> purcell/master
 
 (provide 'init-sql)

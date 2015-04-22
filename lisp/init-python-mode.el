@@ -12,10 +12,6 @@
 		("SConscript\\'" . python-mode))
               auto-mode-alist))
 
-<<<<<<< HEAD
-=======
 (require-package 'pip-requirements)
 
-
->>>>>>> purcell/master
 (provide 'init-python-mode)

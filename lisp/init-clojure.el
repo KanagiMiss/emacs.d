@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 ;; Basic clojure support, even in Emacs 23
 ;; See also init-clojure-cider.el
 
@@ -7,7 +5,6 @@
 (require-package 'cljsbuild-mode)
 (require-package 'elein)
 
->>>>>>> purcell/master
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Slime with Clojure
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
