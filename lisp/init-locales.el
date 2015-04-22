@@ -14,8 +14,12 @@
   (setq locale-coding-system 'utf-8)
   (set-default-coding-systems 'utf-8)
   (set-terminal-coding-system 'utf-8)
+<<<<<<< HEAD
   (unless (eq system-type 'windows-nt)
     (set-selection-coding-system 'utf-8))
+=======
+  (set-selection-coding-system (if (eq system-type 'windows-nt) 'utf-16-le 'utf-8))
+>>>>>>> purcell/master
   (prefer-coding-system 'utf-8))
 
 

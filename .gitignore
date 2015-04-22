@@ -27,7 +27,18 @@ site-lisp/package/
 /.bookmarks.el
 /history
 /helm-adaptive-history
+<<<<<<< HEAD
 /GTD
 /custom.el
 /eshell
 /ede-projects.el
+=======
+/thumbs/
+/emms/
+/.smex-items
+/image-dired/
+/eshell
+/.cask/
+/.sx/
+/org-clock-save.el
+>>>>>>> purcell/master
