@@ -8,7 +8,7 @@
               (concat ";; Happy hacking " (or user-login-name "") " - Emacs ♥ you!\n\n"))
 
 
-
+
 ;; Make C-x C-e run 'eval-region if the region is active
 
 (defun sanityinc/eval-last-sexp-or-region (prefix)
@@ -123,7 +123,7 @@
       (remove-hook 'pre-command-hook #'hl-sexp-unhighlight))))
 
 
-
+
 ;;; Support byte-compilation in a sub-process, as
 ;;; required by highlight-cl
 
@@ -231,13 +231,13 @@
     ad-do-it))
 
 
-
+
 (require-package 'macrostep)
 
 (after-load 'lisp-mode
   (define-key emacs-lisp-mode-map (kbd "C-c e") 'macrostep-expand))
 
-
+
 
 ;; A quick way to jump to the definition of a function given its key binding
 (global-set-key (kbd "C-h K") 'find-function-on-key)
@@ -255,10 +255,10 @@
   (add-hook 'emacs-lisp-mode-hook 'highlight-quoted-mode))
 
 
-(when (maybe-require-package 'flycheck)
-  (require-package 'flycheck-package)
-  (after-load 'flycheck
-    (flycheck-package-setup)))
+;; (when (maybe-require-package 'flycheck)
+;;   (require-package 'flycheck-package)
+;;   (after-load 'flycheck
+;;     (flycheck-package-setup)))
 
 
 
