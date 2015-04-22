@@ -6,17 +6,17 @@
         (is-utf8 (getenv "LC_CTYPE"))
         (is-utf8 (getenv "LANG")))))
 
-;; (when (or window-system (locale-is-utf8-p))
-;;   (setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
-;;   (set-language-environment 'utf-8)
-;;   (when *is-carbon-emacs*
-;;     (set-keyboard-coding-system 'utf-8-mac))
-;;   (setq locale-coding-system 'utf-8)
-;;   (set-default-coding-systems 'utf-8)
-;;   (set-terminal-coding-system 'utf-8)
-;;   (unless (eq system-type 'windows-nt)
-;;     (set-selection-coding-system 'utf-8))
-;;   (prefer-coding-system 'utf-8))
+(when (or window-system (locale-is-utf8-p))
+  (setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+  (set-language-environment 'utf-8)
+  (when *is-carbon-emacs*
+    (set-keyboard-coding-system 'utf-8-mac))
+  (setq locale-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (unless (eq system-type 'windows-nt)
+    (set-selection-coding-system 'utf-8))
+  (prefer-coding-system 'utf-8))
 
 
 

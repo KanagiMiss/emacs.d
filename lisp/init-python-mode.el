@@ -1,15 +1,15 @@
-(autoload 'doctest-mode "doctest-mode" "Python doctest editing mode." t)
+;;;init pyflakes
+(require-package 'flycheck-pyflakes)
+
+(require 'flycheck-pyflakes)
+(add-hook 'python-mode-hook 'flycheck-mode)
+;;;disable other checkers
+(add-to-list 'flycheck-disabled-checkers 'python-flake8)
+(add-to-list 'flycheck-disabled-checkers 'python-pylint)
 
 (setq auto-mode-alist
       (append '(("SConstruct\\'" . python-mode)
 		("SConscript\\'" . python-mode))
               auto-mode-alist))
-
-
-;;----------------------------------------------------------------------------
-;; On-the-fly syntax checking via flymake
-;;----------------------------------------------------------------------------
-(add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
-
 
 (provide 'init-python-mode)

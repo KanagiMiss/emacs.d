@@ -5,7 +5,7 @@
 ;;; Code:
 
 ;;other require:
-(require 'init-auctex)
+;;(require 'init-auctex)
 (require 'init-auto-complete-clang)
 (defun yas-init ()
   (interactive)

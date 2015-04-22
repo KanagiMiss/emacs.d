@@ -28,3 +28,4 @@ site-lisp/package/
 /history
 /helm-adaptive-history
 /GTD
+/custom.el
